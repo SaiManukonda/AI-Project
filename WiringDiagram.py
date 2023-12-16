@@ -66,15 +66,15 @@ class WiringDiagram:
         for i in range(20):
             for j in range(20):
                 if self.diagram[i][j] == 0:
-                    print("⬜", end="", sep=" ")
+                    print("⬜", end="", sep="")
                 elif self.diagram[i][j] == 1:
-                    print("", end=""', sep" "')
+                    print("🟥", end="", sep="")
                 elif self.diagram[i][j] == 2:
-                    print("", end=""', sep" "')
+                    print("🟦", end="", sep="")
                 elif self.diagram[i][j] == 3:
-                    print("", end=""', sep" "')
+                    print("🟩", end="", sep="")
                 else:
-                    print("", end=""', sep" "')
+                    print("🟨", end="", sep="")
             print(end="\n")
         print(self.dangerous)
         print(end="\n")
