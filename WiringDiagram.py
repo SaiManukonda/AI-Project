@@ -4,12 +4,14 @@ import random
 #Wire Guide
 #No Wire = 0
 #Red = 1
-#Blue = 2
-#Yellow = 3
-#Green = 4
+#Green = 2
+#Blue = 3
+#Yellow = 4
 class WiringDiagram:
  def __init__(self):
     self.diagram = np.zeros((20, 20))
+    #0 if it is not dangerous and 1 if it is
+    self.dangerous = 0
     self.generate()
 
  def generate(self):
@@ -22,6 +24,8 @@ class WiringDiagram:
     rows.remove(firstRow)
     firstColor = random.choice(colors)
     colors.remove(firstColor)
+    if firstColor == 1 and 4 in colors:
+        self.dangerous = 1
     
     for i in range(20):
         self.diagram[firstRow-1, i] = firstColor
@@ -31,6 +35,8 @@ class WiringDiagram:
     cols.remove(firstCol)
     secondColor = random.choice(colors)
     colors.remove(secondColor)
+    if secondColor == 1 and 4 in colors:
+        self.dangerous = 1
     
     for i in range(20):
         self.diagram[i, firstCol-1] = secondColor
@@ -40,6 +46,8 @@ class WiringDiagram:
     rows.remove(secondRow)
     thirdColor = random.choice(colors)
     colors.remove(thirdColor)
+    if thirdColor == 1 and 4 in colors:
+        self.dangerous = 1
     
     for i in range(20):
         self.diagram[secondRow-1, i] = thirdColor
@@ -52,10 +60,7 @@ class WiringDiagram:
     
     for i in range(20):
         self.diagram[i, secondCol-1] = fourthColor
-    
-    print(self.diagram)
 
-test = WiringDiagram()
     
     
     

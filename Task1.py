@@ -1,39 +1,79 @@
+from WiringDiagram import WiringDiagram
 import numpy as np
 import pandas as pd
+from LogisticalRegression import LogisticalRegression
 
-class Task1:
-    #know it says task1 but this is abstract logistical regression 
-    #X is the input space
-    #X has to be a pandas dataframe of the input matrix
-    #Y has to be a pandas dataframe of the input matrix
-    def __init__(self, X, Y, learningRate, iterations):
-        self.X = X
-        self.Y = Y
-        self.learningRate = learningRate
-        self.iterations = iterations
+#creating a data set of 1000 inputs and outputs
+X = []
+Y = []
+for i in range(1000):
+    currentWiring = WiringDiagram()
+    flattenedFeatureArray = []
+    #matrix of vector representation of the colors
+    mat = []
+    for i in range(len(currentWiring.diagram)):
+        for f in range(len(currentWiring.diagram)):
+            if currentWiring.diagram[i,f] == 0:
+                mat.append([0,0,0,0])
+                flattenedFeatureArray.append(0)
+                flattenedFeatureArray.append(0)
+                flattenedFeatureArray.append(0)
+                flattenedFeatureArray.append(0)
+            elif currentWiring.diagram[i,f] == 1:
+                mat.append([1,0,0,0])
+                flattenedFeatureArray.append(1)
+                flattenedFeatureArray.append(0)
+                flattenedFeatureArray.append(0)
+                flattenedFeatureArray.append(0)
+            elif currentWiring.diagram[i,f] == 2:
+                mat.append([0,1,0,0])
+                flattenedFeatureArray.append(0)
+                flattenedFeatureArray.append(1)
+                flattenedFeatureArray.append(0)
+                flattenedFeatureArray.append(0)
+            elif currentWiring.diagram[i,f] == 3:
+                mat.append([0,0,1,0])
+                flattenedFeatureArray.append(0)
+                flattenedFeatureArray.append(0)
+                flattenedFeatureArray.append(1)
+                flattenedFeatureArray.append(0)
+            else:
+                mat.append([0,0,0,1])
+                flattenedFeatureArray.append(0)
+                flattenedFeatureArray.append(0)
+                flattenedFeatureArray.append(0)
+                flattenedFeatureArray.append(1)
+    for i in range(len(mat)):
+        if i%2 == 0:
+           firstMatrix = np.array(mat[i]) 
+           secondMatrix = np.array(mat[i+1])
+           flattenedFeatureArray.append(np.dot(firstMatrix, secondMatrix))
+    mat = []       
+    for i in range(len(currentWiring.diagram)):
+        for f in range(len(currentWiring.diagram)):
+            if currentWiring.diagram[f,i] == 0:
+                mat.append([0,0,0,0])
+            elif currentWiring.diagram[f,i] == 1:
+                mat.append([1,0,0,0])
+            elif currentWiring.diagram[f,i] == 2:
+                mat.append([0,1,0,0])
+            elif currentWiring.diagram[f,i] == 3:
+                mat.append([0,0,1,0])
+            else:
+                mat.append([0,0,0,1])
+    for i in range(len(mat)):
+        if i%2 == 0:
+           firstMatrix = np.array(mat[i]) 
+           secondMatrix = np.array(mat[i+1])
+           flattenedFeatureArray.append(np.dot(firstMatrix, secondMatrix))
+    X.append(flattenedFeatureArray)
+    Y.append(currentWiring.dangerous)
+X = np.array(X)
+Y = np.array(Y)
+X_Train = pd.DataFrame(X).T
+Y_Train = pd.DataFrame(Y).T
+
+Train_1000 = LogisticalRegression(X_Train, Y_Train, 0.0005, 10000)
+print(Train_1000.train())
     
-    #trains the data and once the training is done, it returns W and B, which can be used
-    #to predict new images
-    def train(self):
-        m = self.X.shape[1]
-        n = self.Y.shape[0]
-        
-        W = np.zeroes((n, 1))
-        B = 0
-        
-        for i in range(self.iterations):
-            Z = np.dot(W.T, self.X) + B
-            #sigmoid function
-            A = 1/(1+np.exp(-Z))
-            
-            dw = (1/m)*np.dot(A-Y, X.t)
-            db = (1/m)*np.sum(A - Y)
-            
-            W = W - self.learningRate * dw.T
-            B = B = self.learningRate * db
-        
-        return W, B
-        
-            
-        
-        
+
