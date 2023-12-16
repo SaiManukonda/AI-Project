@@ -70,8 +70,8 @@ for i in range(1000):
     Y.append(currentWiring.dangerous)
 X = np.array(X)
 Y = np.array(Y)
-X_Train = pd.DataFrame(X).T
-Y_Train = pd.DataFrame(Y).T
+X_Train = X
+Y_Train = Y
 
 Train_1000 = LogisticalRegression(X_Train, Y_Train, 0.0005, 10000)
 print(Train_1000.train())
