@@ -4,13 +4,16 @@ import matplotlib.pyplot as plt
 
 
 class LogisticalRegression:
-    def __init__(self, X, Y, learningRate, iterations):
+    def __init__(self, X, Y, learningRate, iterations, X_v, Y_v):
         self.X = X
         self.Y = Y
+        self.X_v = X_v
+        self.Y_v = Y_v
         self.learningRate = learningRate
         self.iterations = iterations
         self.epochs = []
         self.loss_values = []
+        self.v_loss_values = []
         self.weights = self.train()
 
     def train(self):
@@ -37,6 +40,15 @@ class LogisticalRegression:
                 )
             cnt /= m
             loss /= m
+            v_loss = 0
+            for i in range(len(self.X_v)):
+                Z = np.dot(W, self.X_v[i])
+                A = self.sigmoid(Z)
+                v_loss += (-1 * self.Y_v[i] * np.log(A)) - (
+                    (1 - self.Y_v[i]) * np.log(1 - A)
+                )
+            v_loss /= len(self.X_v)
+            self.v_loss_values.append(v_loss)
             self.epochs.append(epoch)
             self.loss_values.append(loss)
             print("At epoch", epoch, "loss =", loss, "avg prediction =", cnt)
@@ -52,16 +64,9 @@ class LogisticalRegression:
 
     def graph_loss_over_time(self):
         plt.plot(self.epochs, self.loss_values, label="Training Loss")
-        plt.title("Loss Over Time")
+        plt.plot(self.epochs, self.v_loss_values, label="Validation Loss")
+        plt.title("Loss Over Time 5000 examples")
         plt.xlabel("Epochs")
         plt.ylabel("Loss")
         plt.legend()
         plt.show()
-
-    def loss(self, W, X, Y):
-        Z = np.dot(W, X)
-        A = self.sigmoid(Z)
-        return (-1 * Y * np.log(A)) - ((1 - Y) * np.log(1 - A))
-
-    # early termination
-    # look over loss data and save a few of the past weights so that we can revert to an earlier model
