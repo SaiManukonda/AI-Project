@@ -41,17 +41,17 @@ class LogisticalRegression:
             cnt /= m
             loss /= m
             v_loss = 0
-            for i in range(len(self.X_v)):
+            for i in range(self.X_v.shape[0]):
                 Z = np.dot(W, self.X_v[i])
                 A = self.sigmoid(Z)
                 v_loss += (-1 * self.Y_v[i] * np.log(A)) - (
                     (1 - self.Y_v[i]) * np.log(1 - A)
                 )
-            v_loss /= len(self.X_v)
+            v_loss /= self.X_v.shape[0]
             self.v_loss_values.append(v_loss)
             self.epochs.append(epoch)
             self.loss_values.append(loss)
-            print("At epoch", epoch, "loss =", loss, "avg prediction =", cnt)
+            print("At epoch", epoch, "loss =", loss, "avg prediction success rate =", cnt)
         return W
 
     def sigmoid(self, x):
