@@ -553,11 +553,19 @@ def extractFeatures(current_wiring):
 
 # creating a data set of 1000 inputs and outputs
 # 2500, 0.0005
+# 1000, 0.0005
+# 500, 0.0005
+# 5000, 0.0005
+
+# 500 - .95
+# 1000 - .96
+# 2500 - .99
+# 5000 - .97
 X = []
 Y = []
 X_v = []
 Y_v = []
-total_data_size = 1000
+total_data_size = 5000
 training_data_size = (total_data_size * 9) // 10
 validation_data_size = total_data_size // 10
 testing_data_size = 100

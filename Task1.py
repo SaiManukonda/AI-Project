@@ -7,23 +7,9 @@ from LogisticalRegression import LogisticalRegression
 def extractFeatures(current_wiring):
     one_hot = []
     # count of each color
-    # vect = [0 for _ in range(4)]
-    # for i in range(0, len(current_wiring)):
-    #     for j in range(0, len(current_wiring)):
-    #         if current_wiring[i][j] == 1:
-    #             vect[0] += 1
-    #         elif current_wiring[i][j] == 2:
-    #             vect[1] += 1
-    #         elif current_wiring[i][j] == 3:
-    #             vect[2] += 1
-    #         elif current_wiring[i][j] == 4:
-    #             vect[3] += 1
-    # for k in range(4):
-    #     one_hot.append(vect[k])
-        
-    for i in range(len(current_wiring)):
-        for j in range(len(current_wiring)):
-            vect = [0 for _ in range(4)]
+    vect = [0 for _ in range(4)]
+    for i in range(0, len(current_wiring)):
+        for j in range(0, len(current_wiring)):
             if current_wiring[i][j] == 1:
                 vect[0] += 1
             elif current_wiring[i][j] == 2:
@@ -32,8 +18,22 @@ def extractFeatures(current_wiring):
                 vect[2] += 1
             elif current_wiring[i][j] == 4:
                 vect[3] += 1
-            for k in range(4):
-                one_hot.append(vect[k])
+    for k in range(4):
+        one_hot.append(vect[k])
+        
+    # for i in range(len(current_wiring)):
+    #     for j in range(len(current_wiring)):
+    #         vect = [0 for _ in range(4)]
+    #         if current_wiring[i][j] == 1:
+    #             vect[0] += 1
+    #         elif current_wiring[i][j] == 2:
+    #             vect[1] += 1
+    #         elif current_wiring[i][j] == 3:
+    #             vect[2] += 1
+    #         elif current_wiring[i][j] == 4:
+    #             vect[3] += 1
+    #         for k in range(4):
+    #             one_hot.append(vect[k])
           
     # loop over each two by two patch and average pool
     # for i in range(0, len(current_wiring), 2):
@@ -556,7 +556,11 @@ X = []
 Y = []
 X_v = []
 Y_v = []
-total_data_size = 500
+# 500 - 1
+# 1000 - 1
+# 2500 - 1
+# 5000 - 1
+total_data_size = 5000
 training_data_size = (total_data_size * 9) // 10
 validation_data_size = total_data_size // 10
 testing_data_size = 100

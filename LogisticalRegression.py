@@ -65,7 +65,7 @@ class LogisticalRegression:
     def graph_loss_over_time(self):
         plt.plot(self.epochs, self.loss_values, label="Training Loss")
         plt.plot(self.epochs, self.v_loss_values, label="Validation Loss")
-        plt.title("Loss Over Time 5000 examples")
+        plt.title("Loss Over Time 5000 Examples")
         plt.xlabel("Epochs")
         plt.ylabel("Loss")
         plt.legend()

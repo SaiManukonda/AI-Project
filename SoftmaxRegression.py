@@ -70,7 +70,7 @@ class SoftmaxRegression:
     def graph_loss_over_time(self):
         plt.plot(self.epochs, self.loss_values, label="Training Loss")
         plt.plot(self.epochs, self.v_loss_values, label="Validation Loss")
-        plt.title("Sum of Loss Over each Category Over Time")
+        plt.title("Sum of Loss Over each Category Over Time 5000 Examples")
         plt.xlabel("Epochs")
         plt.ylabel("Loss")
         plt.legend()
