@@ -551,15 +551,10 @@ def extractFeatures(current_wiring):
     return one_hot
 
 
-# creating a data set of 1000 inputs and outputs
 X = []
 Y = []
 X_v = []
 Y_v = []
-# 500 - 1
-# 1000 - 1
-# 2500 - 1
-# 5000 - 1
 total_data_size = 5000
 training_data_size = (total_data_size * 9) // 10
 validation_data_size = total_data_size // 10

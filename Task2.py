@@ -19,7 +19,7 @@ def extractFeatures(current_wiring):
     #             vect[3] += 1
     #         for k in range(4):
     #             one_hot.append(vect[k])
-    
+
     # count of each color
     vect = [0 for _ in range(4)]
     for i in range(0, len(current_wiring)):
@@ -34,7 +34,7 @@ def extractFeatures(current_wiring):
                 vect[3] += 1
     for k in range(4):
         one_hot.append(vect[k])
-    
+
     # loop over each two by two patch and average pool
     # for i in range(0, len(current_wiring), 2):
     #     for j in range(0, len(current_wiring), 2):
@@ -551,16 +551,6 @@ def extractFeatures(current_wiring):
     return one_hot
 
 
-# creating a data set of 1000 inputs and outputs
-# 2500, 0.0005
-# 1000, 0.0005
-# 500, 0.0005
-# 5000, 0.0005
-
-# 500 - .95
-# 1000 - .96
-# 2500 - .99
-# 5000 - .97
 X = []
 Y = []
 X_v = []
